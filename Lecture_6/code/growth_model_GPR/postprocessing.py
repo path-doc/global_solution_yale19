@@ -43,7 +43,7 @@ def ls_error(n_agents, t1, t2, num_points):
         with open(restart_data, 'rb') as fd:
             gp = pickle.load(fd)
             print("data from iteration step ", i+1 , "loaded from disk")
-        fd_new.close()        
+        fd.close()
       
         mean_old, sigma_old = gp_old.predict(k_sample, return_std=True)
         mean, sigma = gp.predict(k_sample, return_std=True)
