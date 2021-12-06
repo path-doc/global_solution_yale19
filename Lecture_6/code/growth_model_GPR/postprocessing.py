@@ -25,7 +25,10 @@ def ls_error(n_agents, t1, t2, num_points):
     np.random.seed(0)
 
     dim = n_agents
-    k_sample = np.random.uniform(k_bar, k_up, (No_samples, dim))
+    k_test = np.random.uniform(k_bar, k_up, (No_samples, dim))
+    # test target container
+    y_test = np.zeros(No_samples, float)
+
     to_print=np.empty((1,5))
         
     for i in range(t1, t2-1):
@@ -46,14 +49,18 @@ def ls_error(n_agents, t1, t2, num_points):
             print("data from iteration step ", i+1 , "loaded from disk")
         fd.close()
       
-        mean_old, sigma_old = gp_old.predict(k_sample, return_std=True)
-        mean, sigma = gp.predict(k_sample, return_std=True)
+        mean_old, sigma_old = gp_old.predict(k_test, return_std=True)
+        mean, sigma = gp.predict(k_test, return_std=True)
 
         gp_old = gp
-        targ_new = solver.iterate(k_sample, n_agents, gp_old)[0]
+        # solve bellman equations at test points
+        for i in range(len(k_test)):
+            y_test[i] = solver.iterate(k_test[i], n_agents, gp_old)[0]
+
+        targ_new = y_test
         # plot predictive mean and 95% quantiles
         #for j in range(num_points):
-            #print k_sample[j], " ",y_pred_new[j], " ",y_pred_new[j] + 1.96*sigma_new[j]," ",y_pred_new[j] - 1.96*sigma_new[j]
+            #print k_test[j], " ",y_pred_new[j], " ",y_pred_new[j] + 1.96*sigma_new[j]," ",y_pred_new[j] - 1.96*sigma_new[j]
 
         diff_mean = mean_old - mean
         max_diff_mean = np.amax(np.fabs(diff_mean))
