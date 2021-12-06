@@ -1,4 +1,4 @@
-#======================================================================
+ #======================================================================
 #
 #     This routine solves an infinite horizon growth model 
 #     with dynamic programming and sparse grids
