@@ -23,9 +23,10 @@ def ls_error(n_agents, t1, t2, num_points):
     file=open('errors.txt', 'w')
     
     np.random.seed(0)
-    unif=np.random.rand(num_points, n_agents)
-    k_sample=k_bar+(unif)*(k_up-k_bar)
-    to_print=np.empty((1,3))
+
+    dim = n_agents
+    Xtraining = np.random.uniform(k_bar, k_up, (No_samples, dim))
+    to_print=np.empty((1,5))
         
     for i in range(t1, t2-1):
         sum_diffs=0
