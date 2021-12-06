@@ -48,7 +48,7 @@ def ls_error(n_agents, t1, t2, num_points):
         mean_old, sigma_old = gp_old.predict(k_sample, return_std=True)
         mean, sigma = gp.predict(k_sample, return_std=True)
 
-        targ_new, c, l, i = solver.iterate(k_sample, n_agents, gp)
+        targ_new = solver.iterate(k_sample, n_agents, gp)[0]
         # plot predictive mean and 95% quantiles
         #for j in range(num_points):
             #print k_sample[j], " ",y_pred_new[j], " ",y_pred_new[j] + 1.96*sigma_new[j]," ",y_pred_new[j] - 1.96*sigma_new[j]
