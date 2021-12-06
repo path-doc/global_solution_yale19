@@ -25,7 +25,7 @@ def ls_error(n_agents, t1, t2, num_points):
     np.random.seed(0)
 
     dim = n_agents
-    Xtraining = np.random.uniform(k_bar, k_up, (No_samples, dim))
+    k_sample = np.random.uniform(k_bar, k_up, (No_samples, dim))
     to_print=np.empty((1,5))
         
     for i in range(t1, t2-1):
