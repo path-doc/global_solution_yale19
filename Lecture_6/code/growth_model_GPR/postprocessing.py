@@ -48,7 +48,8 @@ def ls_error(n_agents, t1, t2, num_points):
         mean_old, sigma_old = gp_old.predict(k_sample, return_std=True)
         mean, sigma = gp.predict(k_sample, return_std=True)
 
-        targ_new = solver.iterate(k_sample, n_agents, gp)[0]
+        gp_old = gp
+        targ_new = solver.iterate(k_sample, n_agents, gp_old)[0]
         # plot predictive mean and 95% quantiles
         #for j in range(num_points):
             #print k_sample[j], " ",y_pred_new[j], " ",y_pred_new[j] + 1.96*sigma_new[j]," ",y_pred_new[j] - 1.96*sigma_new[j]
@@ -65,7 +66,7 @@ def ls_error(n_agents, t1, t2, num_points):
         to_print[0,1]= max_diff_mean
         to_print[0,2]= avg_diff_mean
         to_print[0,3]= max_diff_targ
-        to_print[0,4]= avg=diff_targ
+        to_print[0,4]= avg_diff_targ
         
         np.savetxt(file, to_print, fmt='%2.16f')
         msg = "Cauchy:" + str(diff_mean) + ", max = " + str(round(max_diff_mean,3))
