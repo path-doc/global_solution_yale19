@@ -78,7 +78,7 @@ def ls_error(n_agents, t1, t2, num_points):
         
         np.savetxt(file, to_print, fmt='%2.16f')
         msg = "Cauchy:" + str(diff_mean) + ", max = " + str(round(max_diff_mean,3))
-        msg += os.linesep()
+        msg += os.linesep
         msg += "Absolute:" + str(diff_targ) + ", max = " + str(round(max_diff_targ,3))
         print(msg)
         print("===================================")
