@@ -25,15 +25,15 @@ def ls_error(n_agents, t1, t2, num_points):
     np.random.seed(0)
 
     dim = n_agents
-    k_test = np.random.uniform(k_bar, k_up, (No_samples, dim))
     # test target container
-    y_test = np.zeros(No_samples, float)
+    y_test = np.zeros(num_points, float)
 
     to_print=np.empty((1,5))
         
     for i in range(t1, t2-1):
         sum_diffs=0
         diff = 0
+        k_test = np.random.uniform(k_bar, k_up, (num_points, dim))
       
         # Load the model from the previous iteration step
         restart_data = filename + str(i) + ".pcl"
